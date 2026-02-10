@@ -6,11 +6,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build with Buildozer
-        uses: ArtemSerebriennikov/buildozer-action@v1
+    - name: Build APK with Buildozer
+        uses: ArtemSBulgakov/buildozer-action@v1
         with:
           save_buildozer_config: false
-
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
