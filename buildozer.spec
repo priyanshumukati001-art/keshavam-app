@@ -1,19 +1,18 @@
-[app]
-title = Keshavam
-package.name = keshavam
-package.domain = org.test
-source.dir = .
-source.include_exts = py,png,jpg,kv,atlas
-version = 0.1
-requirements = python3,kivy
-orientation = portrait
-osx.python_version = 3
-osx.kivy_version = 1.9.1
-fullscreen = 0
-android.arch_arm64_v8a = True
-android.api = 31
-android.minapi = 21
-android.sdk = 31
-android.ndk = 23b
-android.skip_update = False
-android.accept_sdk_license = True
+name: Build APK
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build with Buildozer
+        uses: ArtemSerebriennikov/buildozer-action@v1
+        with:
+          save_buildozer_config: false
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Keshavam-Mobile-App
+          path: bin/*.apk
