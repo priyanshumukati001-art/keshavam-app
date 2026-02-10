@@ -1,0 +1,24 @@
+name: Build APK
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Build APK with Buildozer
+        uses: akshay81/buildozer-action@v1
+        with:
+          save_buildozer_config: false
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Keshavam-App
+          path: bin/*.apk
